@@ -1,0 +1,14 @@
+<div *ngIf="rooms?.length > 0; else noRooms">
+  <ul *ngFor="let room of rooms" class="collection">
+    <li (dblclick)="deleteRoom($event, room)" class="collection-item">
+      <strong>
+        {{ room.id }}:
+      </strong> {{ room.description }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #noRooms>
+  <hr />
+  <h5>There are no Rooms to list</h5>
+</ng-template>
