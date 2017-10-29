@@ -1,9 +1,25 @@
 <div *ngIf="rooms?.length > 0; else noRooms">
   <ul *ngFor="let room of rooms" class="collection">
-    <li (dblclick)="deleteRoom($event, room)" class="collection-item">
-      <strong>
-        {{ room.id }}:
-      </strong> {{ room.description }}
+    <li class="collection-item">
+      <strong>{{ room.title }}: </strong> {{ room.description }} <a href="#" class="secondary-content">
+      <i (click)="editRoom($event, room)" class="fa fa-pencil"></i>
+      <i *ngIf="editState && roomToEdit.id == room.id" (click)="clearState()" class="fa fa-compress"></i>
+    </a>
+
+      <div *ngIf="editState && roomToEdit.id == room.id">
+        <form (ngSubmit)="updateRoom(room)">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" placeholder="Add Room Title" [(ngModel)]="room.title" name="title">
+            </div>
+            <div class="input-field col s6">
+              <input type="text" placeholder="Add Description" [(ngModel)]="room.description" name="description">
+            </div>
+            <input type="submit" value="Update Room" class="btn orange">
+            <button (click)="deleteRoom($event, room)" class="btn red">Delete Room</button>
+          </div>
+        </form>
+      </div>
     </li>
   </ul>
 </div>

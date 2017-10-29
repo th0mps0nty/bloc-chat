@@ -9,6 +9,8 @@ import { Room } from '../../models/Room';
 })
 export class RoomsComponent implements OnInit {
   rooms: Room[];
+  editState: boolean = false;
+  roomToEdit: Room;
 
   constructor(private roomService: RoomService) { }
 
@@ -19,8 +21,24 @@ export class RoomsComponent implements OnInit {
     });
   }
 
-  deleteRoom(event, room) {
+  deleteRoom(event, room: Room) {
+    this.clearState();
     this.roomService.deleteRoom(room);
+  }
+
+  editRoom(event, room: Room) {
+    this.editState = true;
+    this.roomToEdit = room;
+  }
+
+  updateRoom(room: Room) {
+    this.roomService.updateRoom(room);
+    this.clearState();
+  }
+
+  clearState() {
+    this.editState = false;
+    this.roomToEdit = null;
   }
 
 }

@@ -37,4 +37,9 @@ export class RoomService {
     this.roomDoc.delete();
   }
 
+  updateRoom(room: Room) {
+    this.roomDoc = this.afs.doc(`rooms/${room.id}`);
+    this.roomDoc.update(room);
+  }
+
 }
