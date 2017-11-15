@@ -2,29 +2,25 @@
   <div class="navigation-header">
     <h3 class="navigation-title">Bloc Chat</h3>
     <span>
-            <button type="button" class="new-room" ng-click="room.newRoom()">New Room</button>
-        </span>
+        <button type="button" class="new-room" ng-click="room.newRoom()">New Room</button>
+      </span>
   </div>
-  <div class="navigation-body" ng-repeat="room in room.rooms">
-    <p class="room-name" ng-click="room.showRoom(room)">{{ room.$value }}</p>
+  <div class="navigation-body" ng-repeat="rm in room.rooms">
+    <a class="room-name" ng-click="room.showRoom(rm)">{{ rm.$value }}</a>
   </div>
 </div>
 
-
-
 <div class="messages">
   <div class="messages-header">
-    <h3>{{ room.currentRoom.name }}</h3>
+    <h3>{{ room.currentRoom.$value }}</h3>
   </div>
   <div class="messages-body" ng-repeat="message in room.messages">
     <div class="username">{{ message.username }}</div>
-    <div class="timestamp">{{ message.sentAt | date : "shortTime" }}</div>
+    <div class="timestamp">{{ message.sentAt }}</div>
     <div class="user-message">{{ message.content }}</div>
   </div>
   <div class="message-field">
-
-    <input type="text" placeholder="Type your message here..." class="message-box" ng-model="home.newMessage.content">
-    <button class="btn-new-message" type="button" ng-click="home.sendMessage()">Send message</button>
-
+    <input type="text" placeholder="Type your message here..." class="message-box" ng-model="room.newMessage.content">
+    <button class="btn-new-message" type="button" ng-click="room.sendMessage()">Send message</button>
   </div>
 </div>
